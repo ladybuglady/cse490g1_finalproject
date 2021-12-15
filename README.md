@@ -79,11 +79,14 @@ _[Event 1198, Event 1199, Event 1200, Event 0, Event 1, Event 2, Event 3, Event 
 Notice that in the last example, since we have a total of 1200 events, after the 1200th event, the next event is event 0. Since this is still in order, this is a positive sample. 
 
 Here are some negative samples:
+
 _[Event 5, Event 6, Event 7, Event 8, Event 45, Event 109, Event 1, Event 800]_
 
 _[Event 37, Event 38, Event 39, Event 40, Event 2, Event 999, Event 43, Event 1011]_
 
 _[Event 1198, Event 1199, Event 1200, Event 0, Event 1012, Event 782, Event 9, Event 940]_
+
+Each event is a (64, 500) matrix containing frequencies for 1 second across 64 channels. With 20 minutes worth of data, I ended up extracting 1198 due to two events containing seizures. I ran the pretask for 300 epochs:
 
 
 
