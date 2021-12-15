@@ -21,6 +21,8 @@ I was intrigued by Oord et. al.'s contrastive predictive coding approach because
 
 [Self-supervised representation learning from electroencephalography signals](https://arxiv.org/abs/1911.05419) by Banville et. al. published in 2019 utilizes a relative positioning pretask to decode electroencephalography (EEG) brain signals. The relative positioning pretask generates pairs of EEG signals and then determines if they are closer or farther away from each other in time. Though this paper was useful for its own downstream, which was decoding sleep stages, I found that the relative positioning pretask wasn't ideal for decoding wrist movement since it is a shorter lived event. Thus, whether two points are near or far in time is not very helpful since the event itself is barely fractions of a second long.
 
+[Generalized neural decoders for transfer learning across participants and recording modalities](https://www.biorxiv.org/content/10.1101/2020.10.30.362558v1.full.pdf) describes the supervised learning model to decode ECoG at the Brunton Lab. This model is capable of generalizing to multiple participants, and now my current research works on utilizing this HTNet to generalize successfully with self-supervised learning.
+
 [Contrastive Representation Learning for Electroencephalogram Classification](http://proceedings.mlr.press/v136/mohsenvand20a/mohsenvand20a.pdf) by Mohsenvand et. al. published in 2020 performs signal transformation tasks on EEG data via a contrastive learning approach. This inspired our prior work to utilize signal transformations for the pretask.
 
 [BENDR: Using Transformers and a Contrastive Self-Supervised Learning Task to Learn From Massive Amounts of EEG Data](https://www.frontiersin.org/articles/10.3389/fnhum.2021.653659/full) published in June of 2021 was an intriguing find due to its use of EEG data. The paper attempts to merge CPC and a Masked Language Model (MLM), but it reports that the overall findings seem to be ineffective relative to other techniques that already exist. This approach can be a pretraining step.
@@ -54,7 +56,28 @@ Each event of data is 1 second long. This means that 5 minutes of data is origin
 Since the contrastive predictive coding pretask doesn't make copies of the data, to obtain approximately 1490 events, I decided to start off with 20 minutes of data.
 
 ### Pretask
+Here, I will detail the mechanism of the pretask. This pretask is adapted from the https://github.com/davidtellez/contrastive-predictive-coding repository using MNIST image data. 
 
+The contrastive predictive coding mechanism utilizes contrastive learning and predictive coding. This means that the pretask modifies the data in some way to create contrasts, such that there "positive" and "negative" samples. Then, it aims to distinguish the positive samples from the negative samples. It is predictive, because an autogregressive model continually updates the predictions via the use of predicition errors.
+
+We first create examples of predictions. Let an example of a prediction be called a "sentence". A sentence will be a sequence of events. A sentence is the sum of 4 given terms, and 4 predicted terms. A sentence may take on the form of:
+
+[Event 4, Event 5, Event 6, Event 7, Event 8, Event 9, Event 10, Event 11]
+
+Each event is a second of ECoG data. The first 4 events will always be in a correct predicted order, as the second of ECoG data denoted as 'Event 5' comes after the second of ECoG data denoted as 'Event 4' and so forth.
+
+The last 4 events are "predictions". If the last 4 events are in a correctly predicted order, the sentence is a positive sample. If they are not, the sentence is a negative sample. Here are examples of positive samples:
+
+[Event 5, Event 6, Event 7, Event 8, Event 9, Event 10, Event 11, Event 12]
+[Event 37, Event 38, Event 39, Event 40, Event 41, Event 42, Event 43, Event 44]
+[Event 1198, Event 1199, Event 1200, Event 0, Event 1, Event 2, Event 3, Event 4]
+
+Notice that in the last example, since we have a total of 1200 events, after the 1200th event, the next event is event 0. Since this is still in order, this is a positive sample. 
+
+Here are some negative samples:
+[Event 5, Event 6, Event 7, Event 8, Event 45, Event 109, Event 1, Event 800]
+[Event 37, Event 38, Event 39, Event 40, Event 2, Event 999, Event 43, Event 1011]
+[Event 1198, Event 1199, Event 1200, Event 0, Event 1012, Event 782, Event 9, Event 940]
 
 
 ### Downstream
