@@ -88,7 +88,11 @@ _[Event 1198, Event 1199, Event 1200, Event 0, Event 1012, Event 782, Event 9, E
 
 Each event is a (64, 500) matrix containing frequencies for 1 second across 64 channels. With 20 minutes worth of data, I ended up extracting 1198 due to two events containing seizures. I ran the pretask for 300 epochs:
 
+![a0f66459_ACCURACY](https://user-images.githubusercontent.com/67766355/146282308-330900f4-85c3-40b9-87a6-c6ab4fb75fe0.png)
 
+![a0f66459_LOSS](https://user-images.githubusercontent.com/67766355/146282313-00323aa0-1084-4830-95b8-a0a0a1f167b7.png)
+
+The pretask is prepared inside the cpc_ecog_data_utils.py file and run inside the cpc_driver.ipynb file.
 
 ### Downstream
 
