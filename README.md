@@ -64,20 +64,27 @@ We first create examples of predictions. Let an example of a prediction be calle
 
 [Event 4, Event 5, Event 6, Event 7, Event 8, Event 9, Event 10, Event 11]
 
+
 Each event is a second of ECoG data. The first 4 events will always be in a correct predicted order, as the second of ECoG data denoted as 'Event 5' comes after the second of ECoG data denoted as 'Event 4' and so forth.
 
 The last 4 events are "predictions". If the last 4 events are in a correctly predicted order, the sentence is a positive sample. If they are not, the sentence is a negative sample. Here are examples of positive samples:
 
 [Event 5, Event 6, Event 7, Event 8, Event 9, Event 10, Event 11, Event 12]
+
 [Event 37, Event 38, Event 39, Event 40, Event 41, Event 42, Event 43, Event 44]
+
 [Event 1198, Event 1199, Event 1200, Event 0, Event 1, Event 2, Event 3, Event 4]
+
 
 Notice that in the last example, since we have a total of 1200 events, after the 1200th event, the next event is event 0. Since this is still in order, this is a positive sample. 
 
 Here are some negative samples:
 [Event 5, Event 6, Event 7, Event 8, Event 45, Event 109, Event 1, Event 800]
+
 [Event 37, Event 38, Event 39, Event 40, Event 2, Event 999, Event 43, Event 1011]
+
 [Event 1198, Event 1199, Event 1200, Event 0, Event 1012, Event 782, Event 9, Event 940]
+
 
 
 ### Downstream
