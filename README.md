@@ -113,4 +113,11 @@ Here is the model architecture used for the downstream:
 The encoder is uploaded and the weights are frozen. Then, a classifier is defines to be able to make output one of two classes. This architecture was adapted from the CPC repository. The downstream data processing happens inside decode_ecog_data_utils.py and then the downstream is run inside downstream.py.
 
 ## Results
+
+These are the final results using 20 minutes of data on the CPC encoder's ability to help a downstream task decode wrist movement:
+
+![a0f66459_downstream_ACCURACY](https://user-images.githubusercontent.com/67766355/146285626-46b828bd-0eb0-4a34-b135-5d162e8b89d0.png)
+![a0f66459_downstream_LOSS](https://user-images.githubusercontent.com/67766355/146285631-effbae46-d9b1-4451-ab2d-c8af0f700d4f.png)
+
+The final validation accuracy for the downstream was 78.75%. For reference, random chance would be 50%. This means that the model has learned some useful representations, but it can definitely improve.
 ## Discussion
