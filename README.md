@@ -103,7 +103,7 @@ The pretask is prepared inside the cpc_ecog_data_utils.py file and run inside th
 ### Downstream
 The downstream part of this project is the wrist movement decoding from the ECoG data. The downstream utilizes the encoder built from the pretask to use the learned representations of the ECoG data to assign meaning to the data, and we are hoping that whatever this assigned meaning entails helps decode wrist movement.
 
-The data was prepared such that X contains the ECoG events and Y contains "move" or "rest" labels. 
+The data was prepared such that X contains the ECoG events and Y contains "move" or "rest" labels. The labels are extracted from a file in the Brunton Lab repository, so the downstream portion of this project cannot be tested unfortunately.
 
 Here is the model architecture used for the downstream:
 
