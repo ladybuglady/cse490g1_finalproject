@@ -9,6 +9,9 @@ In this project I will be experimenting with a contrastive-predictive-coding (CP
 After 300 epochs, the pretask accuracy was able to reach 96.09% training accuracy and 67.19% validation accuracy. After 30 epochs, the downstream reached a 71.60% training accuracy and 78.75% validation accuracy.
 
 ## Video
+
+[zoom_14.mp4.zip](https://github.com/ladybuglady/cse490g1_finalproject/files/7724014/zoom_14.mp4.zip)
+
 ## Introduction
 Computational neuroscience is a field with an abundance of data, but only a small amount available for brain analysis. This is because in order to do any useful brain analysis, researchers must establish what brain activity looks like during specific human behaviors, or else the brain activity renders meaningless. Hence, there is a widening gap between raw data and processed data.
 
