@@ -110,7 +110,7 @@ Here is the model architecture used for the downstream:
 
 <img width="400" alt="Screen Shot 2021-12-15 at 4 11 21 PM" src="https://user-images.githubusercontent.com/67766355/146284830-2a4faab1-e0ee-4a33-b047-55eba46366ab.png">
 
-The encoder is uploaded and the weights are frozen. Then, a classifier is defines to be able to make output one of two classes. This architecture was adapted from the CPC repository.
+The encoder is uploaded and the weights are frozen. Then, a classifier is defines to be able to make output one of two classes. This architecture was adapted from the CPC repository. The downstream data processing happens inside decode_ecog_data_utils.py and then the downstream is run inside downstream.py.
 
 ## Results
 ## Discussion
