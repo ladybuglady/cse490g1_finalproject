@@ -60,6 +60,12 @@ Here, I will detail the mechanism of the pretask. This pretask is adapted from t
 
 The contrastive predictive coding mechanism utilizes contrastive learning and predictive coding. This means that the pretask modifies the data in some way to create contrasts, such that there "positive" and "negative" samples. Then, it aims to distinguish the positive samples from the negative samples. It is predictive, because an autogregressive model continually updates the predictions via the use of predicition errors.
 
+Here is the architecture for the pretask model. It is taken directly from the CPC repository.
+
+<img width="544" alt="Screen Shot 2021-12-15 at 4 12 34 PM" src="https://user-images.githubusercontent.com/67766355/146284966-fc5df42c-9a6c-4d4d-8e57-e80dfbe08ce0.png">
+
+I modified the mechanism of the pretask to make this approach compatible with ECoG data.
+
 We first create examples of predictions. Let an example of a prediction be called a "sentence". A sentence will be a sequence of events. A sentence is the sum of 4 given terms, and 4 predicted terms. A sentence may take on the form of:
 
 _[Event 4, Event 5, Event 6, Event 7, Event 8, Event 9, Event 10, Event 11]_
@@ -96,6 +102,15 @@ The pretask is prepared inside the cpc_ecog_data_utils.py file and run inside th
 
 ### Downstream
 
+The downstream part of this project is the wrist movement decoding from the ECoG data. The downstream utilizes the encoder built from the pretask to use the learned representations of the ECoG data to assign meaning to the data, and we are hoping that whatever this assigned meaning entails helps decode wrist movement.
+
+The data was prepared such that X contains the ECoG events and Y contains "move" or "rest" labels. 
+
+Here is the model architecture used for the downstream:
+
+<img width="400" alt="Screen Shot 2021-12-15 at 4 11 21 PM" src="https://user-images.githubusercontent.com/67766355/146284830-2a4faab1-e0ee-4a33-b047-55eba46366ab.png">
+
+The encoder is uploaded and the weights are frozen. Then, a classifier is defines to be able to make output one of two classes. This architecture was adapted from the CPC repository.
 
 ## Results
 ## Discussion
