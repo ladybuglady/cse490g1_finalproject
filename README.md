@@ -101,7 +101,6 @@ Each event is a (64, 500) matrix containing frequencies for 1 second across 64 c
 The pretask is prepared inside the cpc_ecog_data_utils.py file and run inside the cpc_driver.ipynb file.
 
 ### Downstream
-
 The downstream part of this project is the wrist movement decoding from the ECoG data. The downstream utilizes the encoder built from the pretask to use the learned representations of the ECoG data to assign meaning to the data, and we are hoping that whatever this assigned meaning entails helps decode wrist movement.
 
 The data was prepared such that X contains the ECoG events and Y contains "move" or "rest" labels. 
@@ -113,11 +112,15 @@ Here is the model architecture used for the downstream:
 The encoder is uploaded and the weights are frozen. Then, a classifier is defines to be able to make output one of two classes. This architecture was adapted from the CPC repository. The downstream data processing happens inside decode_ecog_data_utils.py and then the downstream is run inside downstream.py.
 
 ## Results
-
 These are the final results using 20 minutes of data on the CPC encoder's ability to help a downstream task decode wrist movement:
 
 ![a0f66459_downstream_ACCURACY](https://user-images.githubusercontent.com/67766355/146285626-46b828bd-0eb0-4a34-b135-5d162e8b89d0.png)
 ![a0f66459_downstream_LOSS](https://user-images.githubusercontent.com/67766355/146285631-effbae46-d9b1-4451-ab2d-c8af0f700d4f.png)
 
 The final validation accuracy for the downstream was 78.75%. For reference, random chance would be 50%. This means that the model has learned some useful representations, but it can definitely improve.
+
 ## Discussion
+Above all, I think this was a neat experience that forced me to get very hands on with deep learning. I don't think my results were too great but this is a starting point and I will definitely have to modify some more things in the pretask to make CPC compatible with ECoG data. In the future to improve accuracy, I may employ a predictive task within a single Event (as there are 500 values in each event already). Also, I may have to come up with a different labeling scheme for the events because each event is unique, so it might be difficult to capture a pattern between events 40-48 from a pattern learned from events 800-808. 
+
+All data processing and manipulating of the pretask was my code. The architecture of the models themselves and the CPC layer and loss calculations are from the CPC repository linked above!
+
